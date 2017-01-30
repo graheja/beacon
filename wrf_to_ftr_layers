@@ -1,0 +1,26 @@
+import arcpy
+import os
+print("hey whats up hello")
+
+print("Make sure you have removed all previous layers!")
+
+
+""" Accesses all the wrfoutputs."""
+print("getting all files")
+
+path = "C:\Users\BEACON\Desktop\Garima\converted_wrf_outputs"
+all_paths = []
+for dirname, dirnames, filenames in os.walk(path):
+    for filename in filenames:
+        all_paths.append(os.path.join(dirname,filename))
+
+#print(all_paths)
+
+""" Takes wrfoutputs in netcdf format and converts them into feature layers."""
+print("taking wrf outputs in netcdf format and converting them into feature layers")
+
+out_feature_layers = []
+for file_path in all_paths:
+    print(file_path)
+    arcpy.MakeNetCDFFeatureLayer_md(file_path,"co","XLONG","XLAT",'C:\\Users\\BEACON\\Desktop\\Garima\\converted_wrf_outputs\\'+file_path[30:],['south_north','west_east'])
+    #out_feature_layers.append('C:\\Users\\BEACON\\Desktop\\Garima\\ftr_layers\\'+file_path[43:]) <-- not working
