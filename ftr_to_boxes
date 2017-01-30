@@ -1,0 +1,4 @@
+for path_name in all_paths:
+  print("working on", path_name[147:149])
+  name = 'd01_2013_09_05_' + path_name[147:149]
+  arcpy.CreateThiessenPolygons_analysis(path_name, name, "ALL")
