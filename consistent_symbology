@@ -1,3 +1,15 @@
+"""Copies the symbology from one layer, currently rast88, into all the other layers in the current frame."""
+
+import arcpy, os
+
+mxd = arcpy.mapping.MapDocument("CURRENT")
+df = arcpy.mapping.ListDataFrames(mxd)[0]
+rasters = arcpy.mapping.ListLayers(mxd, "*", df)
+print("all rasters:", rasters)
 for layer in rasters:
-  print("working on layer ",layer)
-  arcpy.ApplySymbologyFromLayer_management(layer,"d01_2013_09_05_13") 
+    print("working on layer ",layer)
+    arcpy.CalculateStatistics_management(layer.dataSource)
+    arcpy.ApplySymbologyFromLayer_management(layer,'Kriged_1') #change name of model layer here
+
+#    import consistent_symbology.py
+
